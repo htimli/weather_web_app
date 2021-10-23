@@ -1,0 +1,101 @@
+<!DOCTYPE html5>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Application météo</title>
+    <script src="weather.js" defer></script>
+    <link href="weather.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div id="master_container">
+
+        <h1>Weather Application</h1>
+
+        <div id="menu">
+            <input id="form_button" type="text" placeholder="ville">
+            <button id="menu_button" type="button">afficher</button>
+        </div>
+        <div id="data_container">
+            <div class="current_condition_container">
+                <div class="current_conditon_img_container">
+                    <img id="curret_condition_img" 
+                        alt="cuurent condition icon">
+                </div>
+                <div class="current_condition_info_container">
+                    <p class=city_name></p>
+                    <p class="city_country"></p>
+                    <p class="current_condition"></p>
+                    <p class="current_temperature"></p>
+                </div>
+            </div>
+
+            <div id="hourly_condition_container">
+                <div class="hour_condition_container">
+                    <p class="hour"></p>
+                    <p class="temperature"></p>
+                </div>
+                <div class="hour_condition_container">
+                    <p class="hour"></p>
+                    <p class="temperature"></p>
+                </div>
+                <div class="hour_condition_container">
+                    <p class="hour"></p>
+                    <p class="temperature"></p>
+                </div>
+                <div class="hour_condition_container">
+                    <p class="hour"></p>
+                    <p class="temperature"></p>
+                </div>
+                <div class="hour_condition_container">
+                    <p class="hour"></p>
+                    <p class="temperature"></p>
+                </div>
+                <div class="hour_condition_container">
+                    <p class="hour"></p>
+                    <p class="temperature"></p>
+                </div>
+                <div class="hour_condition_container">
+                    <p class="hour"> 15h </p>
+                    <p class="temperature"> 17°</p>
+                </div>
+            </div>
+            <div id="daily_condition_container">
+                <div class="day_condition_container">
+                    <p class="day"></p>
+                    <div class="daily_condition_min_max_container">
+                        <p class="tempMin"></p>
+                        <p class="tempMax"></p>
+                    </div>
+                </div>
+                <div class="day_condition_container">
+                    <p class="day"></p>
+                    <div class="daily_condition_min_max_container">
+                        <p class="tempMin"></p>
+                        <p class="tempMax"></p>
+                    </div>
+                </div>
+                <div class="day_condition_container">
+                    <p class="day"></p>
+                    <div class="daily_condition_min_max_container">
+                        <p class="tempMin"></p>
+                        <p class="tempMax"></p>
+                    </div>
+                </div>
+                <div class="day_condition_container">
+                    <p class="day">Lun</p>
+                    <div class="daily_condition_min_max_container">
+                        <p class="tempMin"></p>
+                        <p class="tempMax"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
