@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Application météo</title>
     <script src="weather.js" defer></script>
-    <link href="weather.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -17,8 +18,8 @@
         <h1>Weather Application</h1>
 
         <div id="menu">
-            <input id="form_button" type="text" placeholder="ville">
-            <button id="menu_button" type="button">afficher</button>
+            <input id="form_button" class="form-control" type="text" placeholder="ville">
+            <button type="button" id="menu_button"  class="btn btn-light">afficher</button>
         </div>
         <div id="data_container">
             <div class="current_condition_container">

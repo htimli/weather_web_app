@@ -37,12 +37,11 @@ h1 {
     flex-direction: row;
     
 }
-#menu input , #menu button{ 
-    width: 25%;
-    height: 25%;  
-}
+
 #menu input{
     margin-right: 10%;
+    width: 30%;
+    text-align: center;
 }
 .current_condition_container {
     grid-area: 3 / 1/ 4 /-1;
