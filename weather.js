@@ -1,6 +1,7 @@
 const days = document.querySelectorAll('.day');
 const temperaturesMin = document.querySelectorAll('.tempMin');
 const temperaturesMax = document.querySelectorAll('.tempMax');
+const hoursInterval = 2;
 
 
 
@@ -20,11 +21,40 @@ function getApiData(city_name) {
 
         setDomDailyConditionsData(json);     
 
+        setDomHourlyConditionsData(json);
+
+
     }
 
     fetch('https://prevision-meteo.ch/services/json/'+city_name)
         .then(onResponse, onError)
         .then(onStreamProcessed);
+}
+
+function setDomHourlyConditionsData(json) {
+    let timeNow = json.current_condition.hour;
+
+    const hours = document.querySelectorAll('.hour');
+    const hourlyTemperatures = document.querySelectorAll('.temperature');
+
+
+    for (let i = 1; i <= hours.length; i++) {
+        let hour = parseInt(timeNow.substring(0, timeNow.length - 3)) + hoursInterval * i;
+        let resTimeStr;
+        let varJsonDay;
+
+        if (hour <= 23) {
+            resTimeStr = hour + "H00";
+            varJsonDay = "fcst_day_0";
+        } else {
+            resTimeStr = hour - 24 + "H00";
+            varJsonDay = "fcst_day_1";
+        }
+        hours[i - 1].innerHTML = resTimeStr.substring(0, resTimeStr.length - 2);
+        let temp = json[varJsonDay].hourly_data[resTimeStr].TMP2m;
+        hourlyTemperatures[i - 1].innerHTML = Math.round(temp) + '°';
+
+    }
 }
 
 function setDomCurrentConditions(json) {
@@ -66,6 +96,7 @@ function onClick(){
 function main() {
     const menu_button = document.querySelector('#menu_button');
     menu_button.addEventListener('click',onClick);
+
 }
 
 

@@ -8,9 +8,9 @@ body {
 #master_container {
     display: grid;
     width: 700px;
-    height: 700px;
-    grid-template-columns: repeat( 7 , 1fr );
-    grid-template-rows: 100px 100px 300px 100px 100px;
+    height: 600px;
+    grid-template-columns: repeat( 9 , 1fr );
+    grid-template-rows: 100px 100px 200px 100px 100px;
     background: linear-gradient(45deg, #1215b9, #87CEFA); 
     position: relative;  
     margin: 50px auto;
@@ -49,8 +49,24 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 15%;
+    margin-bottom: 5%;
 } 
+
+.current_condition_info_container p{
+    margin: auto;
+}
+.city_name {
+    font-size: 30px;
+}
+.current_temperature {
+    font-size: 40px;
+}
+.current_condition {
+    font-size: 20px;
+}
+.city_country{
+    font-style: italic;
+}
 #current_condition_img{  
         width: 100%;
         height: auto; 
@@ -67,18 +83,18 @@ h1 {
 }
 #hourly_condition_container  {
     display: grid;
-    grid-template-columns: repeat( 7 , 1fr ) ;
-    border: 1px outset  #fff;
+    grid-template-columns: repeat( 9 , 1fr ) ;
+    border-top: 1px outset  #fff;
     border-radius: 10%;
 }
  #daily_condition_container  {
     display: grid;
     grid-template-columns: repeat( 4 , 1fr ) ;
-    border: 1px outset  #fff;
+    border-top: 1px outset  #fff;
+    border-bottom: 1px outset  #fff;
     border-radius: 10%;
 }
 .day_condition_container , .hour_condition_container {
-    border: 0.5px solid  #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -90,6 +106,7 @@ h1 {
 }
 .hour , .day {
     margin-top: 15px;
+    color:gold;
 }
 .daily_condition_min_max_container p {
     display: inline;
