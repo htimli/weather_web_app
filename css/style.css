@@ -118,3 +118,12 @@ h1 {
     color : rgb(7, 226, 255);
 }
 
+@media (max-width : 180px){
+
+    #master_container {
+        width: 300px;
+        grid-template-rows: 50px 50px 100px 50px 50px;
+
+    }
+
+}
