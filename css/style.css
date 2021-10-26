@@ -38,10 +38,15 @@ h1 {
     
 }
 
-#menu input{
-    margin-right: 10%;
-    width: 30%;
+#menu input, button {
     text-align: center;
+    height: 40%;
+}
+#menu button{
+    width : 10%
+}
+#menu input{
+    width: 30%;
 }
 .current_condition_container {
     grid-area: 3 / 1/ 4 /-1;
@@ -126,4 +131,7 @@ h1 {
 
     }
 
+}
+.fas {
+    size: 9x;
 }
