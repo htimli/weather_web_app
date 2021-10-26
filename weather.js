@@ -10,19 +10,33 @@ function getApiData(city_name) {
     
     function onResponse(response) {
         return response.json();
+       
     }
     function onError(error) {
-        console.log("Error :  " + error);
+        console.log("Error :  " + error);  
     }
     function onStreamProcessed(json) {
         console.log(json);
 
-        setDomCurrentConditions(json); 
+        var keys = Object.keys(json)
+        
+        if(keys[0] == "errors") {
+            var error = json.errors[0];
+            if(error .code == '11'){
+                //case where the City or coordinate not found
+                alert(error.text+"\n"+error.description);
+            }  
+        }else{
+            setDomCurrentConditions(json); 
 
-        setDomDailyConditionsData(json);     
+            setDomDailyConditionsData(json);     
 
-        setDomHourlyConditionsData(json);
+            setDomHourlyConditionsData(json);
 
+            const data_container = document.querySelector('#data_container');
+    
+            data_container.style.visibility  = 'visible';
+        }
 
     }
 
@@ -86,10 +100,6 @@ function onClick(){
     city_name = document.querySelector("#form_button").value;
 
     getApiData(city_name);
-
-    const data_container = document.querySelector('#data_container');
-    
-    data_container.style.visibility  = 'visible';
 }
 
 
