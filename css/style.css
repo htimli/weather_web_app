@@ -7,16 +7,16 @@ body {
 
 #master_container {
     display: grid;
-    width: 700px;
+    width: 600px;
     height: 600px;
     grid-template-columns: repeat( 9 , 1fr );
     grid-template-rows: 100px 100px 200px 100px 100px;
     background: linear-gradient(45deg, #1215b9, #87CEFA); 
     position: relative;  
-    margin: 50px auto;
     border: 1px solid #81268a;
     border-width: 5px solid;
     border-radius: 2%;
+    margin: 50px auto;
 }
 #data_container {
     grid-area: 3 / 1/ 6/ -1;
@@ -47,6 +47,9 @@ h1 {
 }
 #menu input{
     width: 30%;
+}
+#map_button {
+    margin-left: 10%;
 }
 .current_condition_container {
     grid-area: 3 / 1/ 4 /-1;
@@ -135,3 +138,10 @@ h1 {
 .fas {
     size: 9x;
 }
+
+#map { 
+    grid-area: 3 / 1/ 6/ -1;
+    display: inherit;
+    border: #fff solid;
+    border-radius: 3%;
+ }

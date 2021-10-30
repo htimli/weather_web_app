@@ -112,4 +112,55 @@ function main() {
 
 
 
+
+
+
+
+
 main();
+
+
+function onClickMapButton(){
+    console.log('map button clicked ');
+    const map = document.querySelector('#map');
+
+    map.style.display = "none";
+}
+
+const map_button = document.querySelector('#map_button');
+
+map_button.addEventListener('click',onClickMapButton);
+
+
+// initialize the map and set its view 
+//2 46 4
+var mymap = L.map('map').setView([46.603,1.888], 5);
+
+//add a tile layer
+
+L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+    // Il est toujours bien de laisser le lien vers la source des données
+    attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+    minZoom: 1,
+    maxZoom: 20
+}).addTo(mymap);
+
+
+function onSuccess(response) {
+    return response.json();
+}
+function onError(error){
+    console.log('error'+error)
+}
+function onStreemProcessed(json){
+    console.log(json);
+}
+
+mymap.on('click', function(e) {
+    alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+
+    fetch(`https://www.prevision-meteo.ch/services/json/lat=${e.latlng.lat}lng=${e.latlng.lng}`)
+    .then(onSuccess,onError)
+    .then(onStreemProcessed)
+});
+                                    
