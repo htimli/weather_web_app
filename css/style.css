@@ -20,8 +20,8 @@ body {
 }
 #data_container {
     grid-area: 3 / 1/ 6/ -1;
-    visibility: hidden;
     display: inherit;
+    z-index: 1;
 }
 h1 {
     grid-area: 1 / 1 / 2 / -1;
@@ -144,4 +144,5 @@ h1 {
     display: inherit;
     border: #fff solid;
     border-radius: 3%;
+    z-index: 2;
  }
