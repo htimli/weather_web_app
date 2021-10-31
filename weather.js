@@ -134,6 +134,7 @@ function initMap(lat,lng,zoom) {
     return L.map('map').setView([lat, lng], zoom);
 }
 
+
 function addTileLayer(mymap) {
     L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
         attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
@@ -154,13 +155,14 @@ function main() {
 
     map_button.addEventListener('click',onClickMapButton);
     
-    var mymap = initMap(frLat,frLng,zoom);
+    var mymap = initMap(48.85,2.35,zoom);
     
     addTileLayer(mymap);
     
     
     mymap.on('click', function(e) {
         console.log("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng);
+        document.querySelector("#form_button").value = '';
         let urlPath = `lat=${e.latlng.lat}lng=${e.latlng.lng}`;
         getApiData(urlPath);
     });
