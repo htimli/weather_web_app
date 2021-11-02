@@ -1,9 +1,10 @@
 const days = document.querySelectorAll('.day');
 const temperaturesMin = document.querySelectorAll('.tempMin');
 const temperaturesMax = document.querySelectorAll('.tempMax');
+const hours = document.querySelectorAll('.hour');
+const hourlyTemperatures = document.querySelectorAll('.temperature');
 const hoursInterval = 2;
 
-const data_container = document.querySelector('#data_container');
 const map = document.querySelector('#map');
 
 
@@ -13,6 +14,10 @@ const frLng = 1.888 ;
 const zoom = 6;
 const zoomMin = 1;
 const zoomMax = 20;
+
+const errorCodeNoCity = 10 ; 
+const errorCodeCityNotFound = 11 ; 
+
 
 
 function getApiData(urlPath) {
@@ -24,20 +29,25 @@ function getApiData(urlPath) {
     function onError(error) {
         console.log("Error :  " + error);  
     }
+    function handleError(json){
 
+        var error = json.errors[0];
+
+             //case where the City or coordinate not found or not set 
+            if(error.code == errorCodeNoCity || errorCodeCityNotFound){
+                alert(error.text+"\n"+error.description);
+            }  
+
+    }
     function onStreamProcessed(json) {
 
         console.log(json);
 
-        var keys = Object.keys(json)    
+        var keys = Object.keys(json);
+
         if(keys[0] == "errors") {
-            var error = json.errors[0];
-
-            if(error .code == '11'){
-
-                //case where the City or coordinate not found
-                alert(error.text+"\n"+error.description);
-            }  
+            handleError(json)
+            
         }else{
 
             setDomCurrentConditions(json); 
@@ -60,14 +70,9 @@ function getApiData(urlPath) {
 function setDomHourlyConditionsData(json) {
     let timeNow = json.current_condition.hour;
 
-    const hours = document.querySelectorAll('.hour');
-    const hourlyTemperatures = document.querySelectorAll('.temperature');
-
-
     for (let i = 1; i <= hours.length; i++) {
         let hour = parseInt(timeNow.substring(0, timeNow.length - 3)) + hoursInterval * i;
-        let resTimeStr;
-        let varJsonDay;
+        let resTimeStr,varJsonDay;
 
         if (hour <= 23) {
             resTimeStr = hour + "H00";
@@ -84,8 +89,18 @@ function setDomHourlyConditionsData(json) {
 }
 
 function setDomCurrentConditions(json) {
-    setDomData(".city_name", json.city_info.name);
-    setDomData(".city_country", json.city_info.country);
+
+    if(json.city_info.name !='NA'){
+        setDomData(".city_name", json.city_info.name);
+        setDomData(".city_country", json.city_info.country);
+    }else{
+        removeDomData(".city_name");
+        setDomData(".city_country", "Lng:");
+        appendDomData(".city_country", json.city_info.longitude.slice(0, -12));
+        appendDomData(".city_country", "Lat:");
+        appendDomData(".city_country", json.city_info.latitude.slice(0, -12));
+
+    }    
     setDomData(".current_condition", json.current_condition.condition);
     setDomData(".current_temperature", json.current_condition.tmp + "°");
     document.querySelector("#curret_condition_img").src = json.current_condition.icon_big;
@@ -105,6 +120,15 @@ function setDomDailyConditionsData(json) {
 function setDomData(DomElement,data) {
     document.querySelector(DomElement).innerHTML = data;
 }
+function appendDomData(DomElement,data) {
+    document.querySelector(DomElement).innerHTML += " "+data;
+}
+function removeDomData(DomElement) {
+    document.querySelector(DomElement).innerHTML = '';
+}
+function removeDomValue(DomElement) {
+    document.querySelector(DomElement).value = '';
+}
 
 function onClickSearchButton(){
     city_name = document.querySelector("#form_button").value;
@@ -112,7 +136,6 @@ function onClickSearchButton(){
 }
 
 function onClickMapButton(){
-    console.log('map button clicked ');   
     displayMap(true);
 }
 
@@ -129,24 +152,37 @@ function displayMap(showing){
 
 }
 // Initialize the map and set its view 
-function initMap(lat,lng,zoom) {
-    //2 46 4
+function setMapView(lat,lng,zoom) {
     return L.map('map').setView([lat, lng], zoom);
 }
 
 
 function addTileLayer(mymap) {
+
     L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
         attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
         minZoom: zoomMin,
         maxZoom: zoomMax 
     }).addTo(mymap);
 }
-                 
 
+function initMap() {
 
+    var mymap = setMapView(frLat, frLng, zoom);
+
+    addTileLayer(mymap);
+
+    mymap.on('click', function (e) {
+        removeDomValue("#form_button");
+        let urlPath = `lat=${e.latlng.lat}lng=${e.latlng.lng}`;
+        getApiData(urlPath);
+    });
+}
+                   
+                
 
 function main() {
+
     const menu_button = document.querySelector('#menu_button');
     const map_button = document.querySelector('#map_button');
 
@@ -155,17 +191,7 @@ function main() {
 
     map_button.addEventListener('click',onClickMapButton);
     
-    var mymap = initMap(48.85,2.35,zoom);
-    
-    addTileLayer(mymap);
-    
-    
-    mymap.on('click', function(e) {
-        console.log("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng);
-        document.querySelector("#form_button").value = '';
-        let urlPath = `lat=${e.latlng.lat}lng=${e.latlng.lng}`;
-        getApiData(urlPath);
-    });
+    initMap();
 }
 
 
@@ -176,4 +202,4 @@ main();
 
 
 
-                   
+

@@ -9,22 +9,19 @@
     <title>Application météo</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet" />
-    
+
     <link rel="stylesheet" href="css/leaflet.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
 
-    <link  rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="img/icons8-soleil-16.png" />
 
 
-    
-    <script src="rsc/leaflet.js" defer ></script>
-    
+
+    <script src="rsc/leaflet.js" defer></script>
+
     <script src="weather.js" defer></script>
 
-    
-
-
-    
     <!--
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
@@ -35,15 +32,15 @@
   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
   crossorigin=""/>
   -->
-    
-    
+
+
 </head>
 
 <body>
 
-    
 
-    
+
+
 
     <div id="master_container">
 
@@ -51,10 +48,10 @@
 
         <div id="menu">
             <input id="form_button" class="form-control" type="text" placeholder="ville">
-            <button type="button" id="menu_button"  class="btn btn-primary">
+            <button type="button" id="menu_button" class="btn btn-primary">
                 <i class="fas fa-search "></i>
             </button>
-            <button type="button" id="map_button"  class="btn btn-light">
+            <button type="button" id="map_button" class="btn btn-light">
                 <i class="fas fa-map-marker-alt"></i>
             </button>
         </div>
@@ -64,16 +61,15 @@
         <div id="data_container">
             <div class="current_condition_container">
                 <div class="current_conditon_img_container">
-                    <img id="curret_condition_img" 
-                        alt="cuurent condition icon">
+                    <img id="curret_condition_img" alt="cuurent condition icon">
                 </div>
                 <div class="current_condition_info_container">
                     <p class="current_temperature"></p>
                     <p class="current_condition"></p>
                     <p class=city_name></p>
                     <p class="city_country"></p>
-                    
-                    
+
+
                 </div>
             </div>
 
@@ -145,7 +141,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 
